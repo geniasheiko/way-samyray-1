@@ -11,6 +11,8 @@ grid-template-columns: 2fr 10fr;
     color: white;
     
 }
+
+
 .dialogsItems .active {
     color: gold;
 }
