@@ -1,45 +1,60 @@
 import React from 'react';
 import styles from './users.module.css';
+import userPhoto from '../../assets/images/user.png';
+import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+import { usersAPI } from '../../api/api';
 
-let Users =(props) => {
-    if (props.users.length===0){
-    props.setUsers( [
-         {id:1, photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJt6KL2ZjHurjeQ4PvBP0-7oxvQljSesFUw&s', followed: false, fullName:'Dimych', status: 'I am a boss', location: {city: 'Mariupol', country: 'Ukraine'}},
-     {id:2, photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJt6KL2ZjHurjeQ4PvBP0-7oxvQljSesFUw&s', followed: true, fullName:'Sasha', status: 'I am a boss too', location: {city: 'Kiev', country: 'Ukraine'}},
-     {id:3, photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxJt6KL2ZjHurjeQ4PvBP0-7oxvQljSesFUw&s', followed: false, fullName:'Andrew', status: 'I am a boss too', location: {city: 'New York', country: 'USA'}},
-    ]
-    )
+let Users = (props) => {
+     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+     let pages = [];
+     for (let i = 0; i <= pagesCount; i++) {
+          pages.push(i);
+     }
+     return <div>
+          <div>
+               {pages.map(p => {
+                    return <span className={props.currentPage === p && styles.selectedPage}
+                         onClick={(e) => {
+                              props.onPageChanged(p);
+                         }}>{p}</span>
+               })}
+          </div>
+          {
+               props.users.map(u => <div key={u.id}>
+                    <span>
+                         <div>
+                              <NavLink to={'/profile/' + u.id}>
+                                   <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                        className={styles.userPhoto} />
+                              </NavLink>
+                         </div>
+                         <div>
+                              {u.followed
+                                   ? <button disabled={props.followingInProgress
+                                        .some (id=>id === u.id)} onClick={() => {
+                                        props.unfollow(u.id)}}>
+                                        UnFollow</button>
+                                   : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+                                        props.follow(u.id)}}>
+                                        Follow</button>}
+
+                         </div>
+                    </span>
+                    <span>
+                         <span>
+                              <div>{u.name}</div>
+                              <div>{u.status}</div>
+                         </span>
+                         <span>
+                              <div>{"u.location.country"}</div>
+                              <div>{"u.location.city"}</div>
+                         </span>
+                    </span>
+               </div >)
+          }
+     </div >
 }
-    return <div>
-        {
-            props.users.map( u => <div key={u.ud}>
-                <span>
-                     <div>
-                         <img src={u.photoUrl} className={styles.usersPhoto} />
-                      </div>
-                     <div>
-                        { u.followed 
-                          ? <button onClick={() => {props.unfollow(u.id)}}>UnFollow</button>
-                          : <button onClick={() => {props.follow(u.id)}}>Follow</button>
-                        }
-     
-                       </div>
-               </span>
-               <span>
-                      <span>
-                          <div>{u.fullName}</div>
-                          <div>{u.status}</div> 
-                     </span>
-                 <span>
-                     <div>{u.location.country}</div>
-                      <div>{u.location.city}</div> 
-                 </span>
-               </span>
-              
-                </div>)
-        }
-    </div>
-}
-       
 
 export default Users;
