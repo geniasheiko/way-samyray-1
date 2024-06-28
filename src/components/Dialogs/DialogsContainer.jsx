@@ -16,12 +16,12 @@ dialogsPage: state.dialogsPage
 
  let mapDispatchToProps = (dispatch) => {
   return {
-    sendMessage: () => {
+    sendMessage: (newMessageBody) => {            //!!
       dispatch(sendMessageCreator());   
      },
-     updateNewMessageBody: (body) => {
-      dispatch(updateNewMessageBodyCreator(body));
-    }  
+    //  updateNewMessageBody: (body) => {
+    //   dispatch(updateNewMessageBodyCreator(body));
+    // }  
   }
  }
 
