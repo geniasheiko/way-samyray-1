@@ -1,21 +1,17 @@
 import React from 'react';
-import Header from './Header';
-import { connect } from 'react-redux';
-import {getAuthUserData} from '../../redux/auth-reducer';
-import { authAPI } from '../../api/api';
+import s from './Header.module.css';
+import { NavLink } from 'react-router-dom';
 
-
-class HeaderContainer extends React.Component {
-   componentDidMount(){
-  this.props.getAuthUserData();
-   }
-   render(){
-return <Header {...this.props} />
+const Header = (props) => {
+   
+   return <header className={s.header}>
+      <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd-lkijlO0g1F6MHKlfo2erxZ-z8FSlzTHRA&s' />
+  
+  <div className={s.loginBlock}>
+   { props.isAuth ? props.login 
+   : <NavLink to={'/login'}>Login</NavLink> }
+   
+  </div>
+   </header>
 }
-}
-const mapStateToProps = (state) => ({
-   isAuth: state.auth.isAuth,
-   login: state.auth.login
-});
-
-export default connect (mapStateToProps, {getAuthUserData}) (HeaderContainer);
+export default Header;
