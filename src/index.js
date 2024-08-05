@@ -7,6 +7,7 @@ import App from './App';
 // import {BrowserRouter} from "react-router-dom";
 import {Provider} from 'react-redux';
 
+
 setInterval(() => {
   store.dispatch ({type: "FAKE"})
 }, 1000);
@@ -14,9 +15,9 @@ setInterval(() => {
  const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
+   <Provider store={store}>
     <App />
-    </Provider>
+   </Provider>
   </React.StrictMode>
 )
 
