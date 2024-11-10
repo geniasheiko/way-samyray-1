@@ -15,21 +15,42 @@ export function withRouter(Children) {
   }
 }
 
+//  refreshProfile() 
+//   let userId = this.props.match.params.userId;
+//   if(!userId) {
+//     userId = 2;
+//   }
+//  this.props.getUserProfile(userId);
+//  this.props.getStatus(userId); 
+// };
+
 
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
-   let userId = this.props.match.params.userId;
-    if(!userId) {
-      userId = 2;
-    }
-   this.props.getUserProfile(userId);
-   this.props.getStatus(userId);
+      let userId = this.props.match.params.userId;
+      if(!userId) {
+        userId = 2;
+      }
+     this.props.getUserProfile(userId);
+     this.props.getStatus(userId); 
   }
+
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (this.props.match.params.userId != prevProps.match.params.userId){
+  //   this.refreshProfile();
+  //   }
+  // }
 
   render() {
    return ( 
-    <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+    <Profile {...this.props}
+    // idOwner={!this.props.match.params.userId} 
+    profile={this.props.profile} 
+    status={this.props.status} 
+    updateStatus={this.props.updateStatus}
+   // savePhoto ={this.props.savePhoto}
+    />
    )
   }
 }

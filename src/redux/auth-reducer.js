@@ -2,6 +2,7 @@ import { authAPI } from "../api/api";
 
 
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA';
+//const GET_CAPTCHA_URL_SUCCESS = 'samurai-network/auth/GET_CAPTCHA_URL_SUCCESS';
 
 
 
@@ -9,13 +10,15 @@ let initialState = {
     userId:null,
    email: null,
    login: null,
-   isAuth: false
+   isAuth: false,
+   //captchaUrl: null     //if null, then captcha is not required
  };
  
  
  const authReducer = (state = initialState, action) => {
     switch(action.type) {
         case SET_USER_DATA:
+        //case GET_CAPTCHA_URL_SUCCESS:
             return{
                 ...state,
                 ...action.data,
@@ -38,18 +41,34 @@ let response = await authAPI.me();
             dispatch(setAuthUserData(id, email, login, true));
         }
 }
+
+//for Captcha
+// export const getCaptchaUrlSuccess = (captchaUrl) => ({
+//     type: GET_CAPTCHA_URL_SUCCESS, payload: {captchaUrl}
+// });
+
 // Закоментирована, так как нет логина, еще не сделан
 // export const login = (email, password, rememberMe) => async (dispatch) => {
 //     let response = await authAPI.login(email, password, rememberMe);
-    
-   
 //         if (response.data.resultCode === 0) {
+//  //success, get auth data
 //             dispatch(getAuthUserData())
-//         } else {
-//             let message = response.data.message.length > 0 ? response.data.resultCode[0] : ""
+//         } else  {
+//         if(response.data.resultCode === 10) {
+//         dispatch(getCaptchaUrl());
+//             } 
+//             let message = response.data.message.length > 0 ? response.data.resultCode[0] : "Some error";
 //             dispatch(stopSubmit("login", {_error: message}));
 //         }
 //     }
+
+//for Captcha
+// export const getCaptchaUrl = () => async(dispatch) => {
+//     const response = await securityAPI.getCaptchaUrl();
+//     const captchaUrl = response.data.url;
+// dispatch(getCaptchaUrlSuccess(captchaUrl));
+
+// }
 
 // export const logout = () => async (dispatch) => {
 //     let response = await authAPI.logout();

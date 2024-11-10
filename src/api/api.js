@@ -40,7 +40,17 @@ export const profileAPI = {
    },
    updateStatus(status) {
    return instance.put('profile/status', { status: status });
-   }
+   },
+   
+//    savePhoto(photosFile) {
+//     const formData = new FormData();
+//     formData.append("image", photoFile);
+//  return instance.put(`profile\photo`, formData, {
+//         headers: {
+//             'Content-Type': 'multipart/form-data'
+//         }
+//     });
+//    }
 }
 
 export const authAPI = {
@@ -48,6 +58,13 @@ export const authAPI = {
      return instance.get(`auth/me`)
            }
 }
+
+//for Capcha
+// export const securityAPI = {
+//     getCaptchaUrl() {
+//         return instance.get(`security/get-captcha-url`);
+//     }
+// }
 
 
 
