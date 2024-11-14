@@ -13,19 +13,24 @@ const Dialogs = (props) => {
     let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id} />);
     let newMessageBody = state.newMessageBody;
 
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
+let addNewMessage = (values) => {
+    props.sendMessage(values.newMessageBody);
+}
+//if (!props.isAuth) return <Navigate to="/login" />;  ///для блокировки, если не залогинен
 
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
-    let addNewMessage = (values) => {
-        props.sendMessage(values);
-    }
+    // let onSendMessageClick = () => {
+    //     props.sendMessage();
+    // }
+
+    // let onNewMessageChange = (e) => {
+    //     let body = e.target.value;
+    //     props.updateNewMessageBody(body);
+    // }
+    // let addNewMessage = (values) => {
+    //     props.sendMessage(values);
+    // }
     
-    //if (!props.isAuth) return <Navigate to="/login" />;  ///для блокировки, если не залогинен
+    
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

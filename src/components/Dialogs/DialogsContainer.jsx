@@ -17,11 +17,9 @@ dialogsPage: state.dialogsPage
  let mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (newMessageBody) => {            //!!
-      dispatch(sendMessageCreator());   
+      dispatch(sendMessageCreator(newMessageBody));   
      },
-    //  updateNewMessageBody: (body) => {
-    //   dispatch(updateNewMessageBodyCreator(body));
-    // }  
+    
   }
  }
 
