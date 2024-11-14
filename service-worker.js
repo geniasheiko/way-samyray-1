@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/way-samyray-1/precache-manifest.ae3f8878feb4f403cc552f58a0a53630.js"
+  "/way-samyray-1/precache-manifest.6436d21c7ac836a9d46f93d5829a8c6a.js"
 );
 
 self.addEventListener('message', (event) => {
